@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(filename='security_log.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 if __name__ == '__main__':
-    print (f"Does 'password' meet security requirements: {sanitiser.simple_check_password("password")}" )
+    print (f"Does 'password' meet security requirements: {sanitiser.example_checker("password")}" )
     print (f"Make <HTML> web safe: {sanitiser.make_web_safe('<html>')}")
     print (f"Is 'name@example.com' an email address: {sanitiser.check_email('name@example.com')}")
     print (f"Is '123!' an name: {sanitiser.validate_name('123!')}")
@@ -32,3 +32,4 @@ if __name__ == '__main__':
         print(f"Not a valid password because it has {inst.args}.")
     except Exception as inst:
         print(f"Log as a {type(inst)}")
+

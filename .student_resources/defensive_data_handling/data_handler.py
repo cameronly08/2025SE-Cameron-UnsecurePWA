@@ -10,24 +10,23 @@ import bcrypt
 
 
 # A simple password check function that checks if the password is valid
-def simple_check_password(password: str) -> bool:
-    if not issubclass(type(password), str):
-        return False
-    if len(password) < 8:
-        return False
-    if len(password) > 20:
-        return False
-    if re.search(r"[ ]", password):
-        return False
-    if not re.search(r"[A-Z]", password):
-        return False
-    if not re.search(r"[a-z]", password):
-        return False
-    if not re.search(r"[0-9]", password):
-        return False
-    if not re.search(r"[@$!%*?&]", password):
-        return False
-    return True
+def example_checker() -> str:
+    username = request.form["username"]
+    password = request.form["password"]
+    isLoggedIn = dbHandler.retrieveUsers(username, password)
+    
+    if len(password) < 9 or len(password) > 12:
+        return "Password must be between 9 and 12 characters."
+    if not password.isalnum():
+        return "Password must be alphanumeric."
+    if len(re.findall(r'[A-Z]', password)) > 4:
+        return "Password must not contain more than 4 uppercase letters."
+    if len(re.findall(r'[a-z]', password)) > 4:
+        return "Password must not contain more than 4 lowercase letters."
+    if len(re.findall(r'[0-9]', password)) > 3:
+        return "Password must not contain more than 3 digits."
+    
+    return "Password is valid."
 
 
 # A more pythonic way to check the password is valid that manages exceptions
@@ -95,3 +94,6 @@ def validate_number(number: str) -> bool:
 # Function to salt a hash input
 def salt_and_hash(password: str) -> bytes:
     return  # to be implemented
+
+
+    
